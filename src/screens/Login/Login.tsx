@@ -1,4 +1,4 @@
-import { Dimensions, ImageBackground, StyleSheet, Text, View } from 'react-native'
+import { Dimensions, StyleSheet, Text, View } from 'react-native'
 import React, { useState } from 'react'
 import { LoginForm } from '../../components/molecules'
 import { SafeAreaView } from 'react-native-safe-area-context'
@@ -29,7 +29,7 @@ const Login = () => {
                         <Text style={{ color: '#1E293B', fontWeight: '700', fontSize: 20, marginBottom: -20 }}>Chawla Auto Components</Text>
                     </View>
                 </View>
-                <View style={{flexDirection:'row',alignItems:'center'}}>
+                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                     <Svg height="200" width="200"  >
                         <Path
                             d="M0 198 C 50 0, 100 0, 200 198 Z"

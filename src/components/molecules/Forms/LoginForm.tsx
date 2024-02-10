@@ -14,6 +14,7 @@ import { BlurView } from '@react-native-community/blur'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 const LoginForm = () => {
+    const phoneRegExp = /^[0-9]{10}$/;
     const auth: any = useAuthContext();
     const toast = useToast();
     console.log(auth);
@@ -22,7 +23,6 @@ const LoginForm = () => {
         setShowPassword(!showPassword);
     };
     const validationSchema = yup.object().shape({
-        email: yup.string().email('Enter a valid email').required('Email is required'),
         password: yup.string().min(6, 'Password must be at least 6 characters').required('Password is required'),
     });
     const showToast = (message: any) => {
@@ -56,6 +56,14 @@ const LoginForm = () => {
         loading: false,
     })
     const handleState = async (values: any, formikHelpers: FormikHelpers<{ email: string; password: string }>) => {
+        if (phoneRegExp.test(values.email)) {
+            let val=values.email
+            console.log('Hii')
+            delete values.email;
+            values.phoneNumber=val
+        } else {
+            console.log("no")
+        }
         console.log(values);
         setVal(prev => ({
             ...prev,
@@ -137,7 +145,7 @@ const LoginForm = () => {
                                 </View>
                             </View>
                             <View style={{ marginTop: 22 }}>
-                                <ButtonIcon loading={val} handleSubmit={handleSubmit} />
+                                <ButtonIcon loading={val} handleSubmit={handleSubmit} name={'LOGIN'} width={240} />
                             </View>
                         </FormControl>
                     )}

@@ -4,7 +4,6 @@ import { CodeScannerPage } from '../../components/molecules/Scanner/CodeScannerP
 import { useCameraPermission } from 'react-native-vision-camera';
 import { useAuthContext } from '../../components/auth/AuthGuard';
 import Navbar from '../Navbar/Navbar';
-import LinearGradient from 'react-native-linear-gradient';
 import Card from '../../components/atoms/Card/Card';
 import ImageIndex from '../../theme/AssestIndex';
 
@@ -20,13 +19,13 @@ const Dashboard = ({ navigation }: any) => {
             <Navbar navigation={navigation} />
             <View style={{ flexDirection: 'column', alignItems: 'center', }}>
                 <TouchableOpacity style={{ marginVertical: 10 }}>
-                    <Card name={'Reconciliation'} image={ImageIndex.notepad} />
+                    <Card name={'Reconciliation'} image={ImageIndex.notepad} height={150}/>
                 </TouchableOpacity>
                 <TouchableOpacity style={{ marginVertical: 60 }}>
-                    <Card name={'Purchase'} image={ImageIndex.cart} />
+                    <Card name={'Purchase'} image={ImageIndex.cart} height={150} />
                 </TouchableOpacity>
                 <TouchableOpacity style={{ marginVertical: 8 }}>
-                    <Card name={'Sales'} image={ImageIndex.sales} />
+                    <Card name={'Sales'} image={ImageIndex.sales} height={150} />
                 </TouchableOpacity>
             </View>
         </SafeAreaView>

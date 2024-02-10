@@ -2,7 +2,7 @@ import { Image, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import LinearGradient from 'react-native-linear-gradient'
 
-const Card = ({ name, image }: any) => {
+const Card = ({ name, image, height }: any) => {
     return (
         <LinearGradient
             colors={[
@@ -16,7 +16,7 @@ const Card = ({ name, image }: any) => {
                 justifyContent: 'center',
                 alignItems: 'center',
                 borderWidth: 1,
-                width: 328, height: 136,
+                width: 328, height: height,
                 borderRadius: 8,
                 borderColor: '#FFFFFF21',
                 shadowColor: "#000000",
@@ -26,7 +26,8 @@ const Card = ({ name, image }: any) => {
                 },
                 shadowOpacity: 0.18,
                 shadowRadius: 4.59,
-                elevation: 5
+                elevation: 5,
+                zIndex: 1
             }}
         >
             <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around', gap: 20 }}>

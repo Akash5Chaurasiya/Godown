@@ -12,61 +12,68 @@ import Lottie from 'lottie-react-native'
 import { Image } from '@gluestack-ui/themed';
 import ImageIndex from '../theme/AssestIndex';
 import Feather from 'react-native-vector-icons/Ionicons';
+import Assign from '../screens/Assign/Assign';
+import Transfer from '../screens/Transfer/Transfer';
+import History from '../screens/History/History';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
-const Stack = createStackNavigator<ApplicationParamList>();
+const Stack = createStackNavigator<any>();
 const Tab = createBottomTabNavigator();
 const AnimatedSvg = Animated.createAnimatedComponent(Svg)
 const Home: React.FC = () => {
     return (
-        <Stack.Navigator
-            screenOptions={{ headerShown: false, animationTypeForReplace: 'push' }}
+        <Tab.Navigator
+            tabBar={(props) => <AnimatedTabBar {...props} />}
+            initialRouteName='Dashboard'
+            screenOptions={({ route }) => ({
+                tabBarOptions: {
+                    tabBarShowLabel: true,
+                },
+            } as BottomTabNavigationOptions)}
         >
-            <Stack.Screen name='Dashboard' component={Dashboard} />
-        </Stack.Navigator>
+            <Tab.Screen name='Home' component={Dashboard} options={{
+                headerShown: false,
+                tabBarLabel: 'Home',
+                tabBarLabelStyle: { color: 'white' },
+                // @ts-ignore
+                tabBarIcon: () => <Feather name="home" style={{ alignSelf: 'center' }} size={30} color={'white'} />,
+            }}
+            />
+            <Tab.Screen name='Assign' component={Assign} options={{
+                headerShown: false,
+                tabBarLabel: 'Assign',
+                tabBarLabelStyle: { color: 'white' },
+                tabBarIcon: () => <Feather name="qr-code" style={{ alignSelf: 'center' }} size={30} color={'white'} />,
+            }}
+            />
+            <Tab.Screen name='Transfer' component={Transfer} options={{
+                headerShown: false,
+                tabBarLabel: 'Transfer',
+                tabBarLabelStyle: { color: 'white' },
+                tabBarIcon: () => <Feather name="swap-vertical" style={{ alignSelf: 'center' }} size={30} color={'white'} />,
+            }}
+            />
+            <Tab.Screen name='History' component={History} options={{
+                headerShown: false,
+                tabBarLabel: 'History',
+                tabBarLabelStyle: { color: 'white' },
+                tabBarIcon: () => <Feather name="time" style={{ alignSelf: 'center' }} size={30} color={'white'} />,
+            }}
+            />
+        </Tab.Navigator>
     )
 }
 const ApplicationNavigator = () => {
     return (
-        <NavigationContainer>
-            <Tab.Navigator
-                tabBar={(props) => <AnimatedTabBar {...props} />}
-                screenOptions={({ route }) => ({
-                    tabBarOptions: {
-                        tabBarShowLabel: true,
-                    },
-                } as BottomTabNavigationOptions)}
-            >
-                <Tab.Screen name='Home' component={Home} options={{
-                    headerShown: false,
-                    tabBarLabel: 'Home',
-                    tabBarLabelStyle: { color: 'white' },
-                    // @ts-ignore
-                    tabBarIcon: () => <Feather name="home" style={{alignSelf:'center'}} size={30} color={'white'} />,
-                }}
-                />
-                <Tab.Screen name='Chat' component={PlaceholderScreen} options={{
-                    headerShown: false,
-                    tabBarLabel: 'Assign',
-                    tabBarLabelStyle: { color: 'white' },
-                    tabBarIcon: () => <Feather name="qr-code" style={{alignSelf:'center'}} size={30} color={'white'} />,
-                }}
-                />
-                <Tab.Screen name='Settings' component={PlaceholderScreen} options={{
-                    headerShown: false,
-                    tabBarLabel: 'Transfer',
-                    tabBarLabelStyle: { color: 'white' },
-                    tabBarIcon: () => <Feather name="swap-vertical" style={{alignSelf:'center'}} size={30} color={'white'} />,
-                }}
-                />
-                <Tab.Screen name='User' component={PlaceholderScreen} options={{
-                    headerShown: false,
-                    tabBarLabel: 'History',
-                    tabBarLabelStyle: { color: 'white' },
-                    tabBarIcon: () => <Feather name="time" style={{alignSelf:'center'}} size={30} color={'white'} />,
-                }}
-                />
-            </Tab.Navigator>
-        </NavigationContainer>
+        <GestureHandlerRootView style={{ flex: 1 }}>
+            <NavigationContainer>
+                <Stack.Navigator
+                    screenOptions={{ headerShown: false, animationTypeForReplace: 'push' }}
+                >
+                    <Stack.Screen name='HomeTabs' component={Home} />
+                </Stack.Navigator>
+            </NavigationContainer>
+        </GestureHandlerRootView>
     );
 };
 const PlaceholderScreen = () => {
@@ -168,7 +175,7 @@ const TabBarComponent = ({ active, options, onLayout, onPress, label }: TabBarCo
     })
     const animatedIconContainerStyles = useAnimatedStyle(() => {
         return {
-            opacity: withTiming(active ? 1: 0.5, { duration: 250 })
+            opacity: withTiming(active ? 1 : 0.5, { duration: 250 })
         }
     })
     return (
@@ -209,15 +216,15 @@ const styles = StyleSheet.create({
         borderRadius: 50,
         backgroundColor: '#0078FB',
         width: 60,
-        marginBottom:6,
+        marginBottom: 6,
     },
     iconContainer: {
         position: 'absolute',
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop:14,
-        marginLeft:15,
-        flex:1
+        marginTop: 14,
+        marginLeft: 15,
+        flex: 1
     },
     icon: {
         height: 20,

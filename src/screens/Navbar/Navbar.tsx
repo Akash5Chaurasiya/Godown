@@ -7,7 +7,7 @@ import { useAuthContext } from '../../components/auth/AuthGuard'
 const Navbar = ({ navigation }: any) => {
     const auth: any = useAuthContext()
     return (
-        <SafeAreaView style={{ borderColor: '#DEDEDE', borderWidth: 1, padding: 5 }}>
+        <SafeAreaView style={{ borderColor: '#DEDEDE', padding: 5 }}>
             <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
                 <Image
                     size="sm"
